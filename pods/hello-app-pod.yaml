@@ -1,0 +1,11 @@
+# Create pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-app-pod
+spec:
+  containers:
+  - name: hello-app-container
+    image: saichandrasekar/hello-app:v.03
+    ports:
+    - containerPort: 8080
