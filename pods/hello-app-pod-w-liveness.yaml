@@ -1,0 +1,19 @@
+# Create pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-app-pod-w-liveness
+spec:
+  containers:
+  - name: hello-app-container
+    image: saichandrasekar/hello-app:v.03
+    livenessProbe:
+      httpGet:
+        path: /api/hello
+        port: 8081
+      initialDelaySeconds: 5
+      timeoutSeconds: 1
+      periodSeconds: 10
+      failureThreshold: 3
+    ports:
+    - containerPort: 8081

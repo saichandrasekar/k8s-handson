@@ -3,3 +3,6 @@ kubectl create namespace mayuran-space
 
 # Delete namespace
 kubectl delete namespace mayuran-space
+
+# List namespaces
+kubectl get namespaces

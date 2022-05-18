@@ -1,11 +1,16 @@
 # Create a new pod
-kubectl create -f pod/hello-app-pod.yaml -n mayuran-space
+kubectl create -f pods/hello-app-pod.yaml -n mayuran-space
 
 # Delete pod
-kubectl delete -f pod/hello-app-pod.yaml -n mayuran-space
+kubectl delete -f pods/hello-app-pod.yaml -n mayuran-space
 
 # List pods
 kubectl get pods -A
 
 # Access app with port forwarding
-kubectl port-forward kuard 8080:8080
+kubectl port-forward hello-app-pod 8080:8080
+
+
+kubectl create -f pods/hello-app-pod-w-liveness.yaml -n mayuran-space
+
+kubectl port-forward hello-app-pod-w-liveness 8080:8080
