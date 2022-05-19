@@ -14,7 +14,7 @@ global:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: []
-  storageClass: ""
+  storageClass: "mayuran-local-storage-class"
 
 ## @section Common parameters
 
@@ -1640,7 +1640,7 @@ zookeeper:
   ##
   persistence:
     enabled: true
-    storageClass: ""
+    storageClass: "mayuran-local-storage-class"
     accessModes:
       - ReadWriteOnce
     size: 8Gi
