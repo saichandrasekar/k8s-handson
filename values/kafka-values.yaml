@@ -762,7 +762,7 @@ externalAccess:
   service:
     ## @param externalAccess.service.type Kubernetes Service type for external access. It can be NodePort or LoadBalancer
     ##
-    type: NodePort
+    type: LoadBalancer
     ## @param externalAccess.service.ports.external Kafka port used for external access when service type is LoadBalancer
     ##
     ports:
@@ -780,7 +780,7 @@ externalAccess:
     ##   - broker1.external.example.com
     ##   - broker2.external.example.com
     ##
-    loadBalancerNames: []
+    loadBalancerNames: [broker1.ext.mayuran.com]
     ## @param externalAccess.service.loadBalancerAnnotations Array of load balancer annotations for each Kafka broker. Length must be the same as replicaCount
     ## e.g:
     ## loadBalancerAnnotations:
@@ -801,7 +801,7 @@ externalAccess:
     ##   - 30001
     ##   - 30002
     ##
-    nodePorts: [30001]
+    nodePorts: []
     ## @param externalAccess.service.useHostIPs Use service host IPs to configure Kafka external listener when service type is NodePort
     ##
     useHostIPs: false
