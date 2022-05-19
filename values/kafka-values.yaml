@@ -723,7 +723,7 @@ externalAccess:
   autoDiscovery:
     ## @param externalAccess.autoDiscovery.enabled Enable using an init container to auto-detect external IPs/ports by querying the K8s API
     ##
-    enabled: false
+    enabled: true
     ## Bitnami Kubectl image
     ## ref: https://hub.docker.com/r/bitnami/kubectl/tags/
     ## @param externalAccess.autoDiscovery.image.registry Init container auto-discovery image registry
@@ -780,7 +780,7 @@ externalAccess:
     ##   - broker1.external.example.com
     ##   - broker2.external.example.com
     ##
-    loadBalancerNames: [broker1.ext.mayuran.com]
+    loadBalancerNames: []
     ## @param externalAccess.service.loadBalancerAnnotations Array of load balancer annotations for each Kafka broker. Length must be the same as replicaCount
     ## e.g:
     ## loadBalancerAnnotations:
@@ -1016,7 +1016,7 @@ rbac:
   ## binding Kafka ServiceAccount to a role
   ## that allows Kafka pods querying the K8s API
   ##
-  create: false
+  create: true
 
 ## @section Metrics parameters
 

@@ -4,7 +4,7 @@ helm install -f values/kafka-values.yaml mayuran-2205-release --create-namespace
 
 
 NAME: mayuran-2205-release
-LAST DEPLOYED: Thu May 19 21:51:42 2022
+LAST DEPLOYED: Thu May 19 22:16:48 2022
 NAMESPACE: mayuran-kafka-space
 STATUS: deployed
 REVISION: 1
@@ -55,18 +55,11 @@ To create a pod that you can use as a Kafka client run the following commands:
 
 To connect to your Kafka server from outside the cluster, follow the instructions below:
 
-    Kafka brokers domain: You can get the external node IP from the Kafka configuration file with the following commands (Check the EXTERNAL listener)
+  NOTE: It may take a few minutes for the LoadBalancer IPs to be available.
+        Watch the status with: 'kubectl get svc --namespace mayuran-kafka-space -l "app.kubernetes.io/name=kafka,app.kubernetes.io/instance=mayuran-2205-release,app.kubernetes.io/component=kafka,pod" -w'
 
-        1. Obtain the pod name:
+    Kafka Brokers domain: You will have a different external IP for each Kafka broker. You can get the list of external IPs using the command below:
 
-        kubectl get pods --namespace mayuran-kafka-space -l "app.kubernetes.io/name=kafka,app.kubernetes.io/instance=mayuran-2205-release,app.kubernetes.io/component=kafka"
+        echo "$(kubectl get svc --namespace mayuran-kafka-space -l "app.kubernetes.io/name=kafka,app.kubernetes.io/instance=mayuran-2205-release,app.kubernetes.io/component=kafka,pod" -o jsonpath='{.items[*].status.loadBalancer.ingress[0].ip}' | tr ' ' '\n')"
 
-        2. Obtain pod configuration:
-
-        kubectl exec -it KAFKA_POD -- cat /opt/bitnami/kafka/config/server.properties | grep advertised.listeners
-
-    Kafka brokers port: You will have a different node port for each Kafka broker. You can get the list of configured node ports using the command below:
-
-        echo "$(kubectl get svc --namespace mayuran-kafka-space -l "app.kubernetes.io/name=kafka,app.kubernetes.io/instance=mayuran-2205-release,app.kubernetes.io/component=kafka,pod" -o jsonpath='{.items[*].spec.ports[0].nodePort}' | tr ' ' '\n')"
-			
-
+    Kafka Brokers port: 9094
