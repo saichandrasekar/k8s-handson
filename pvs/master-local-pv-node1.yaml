@@ -4,7 +4,7 @@ metadata:
   name: mayuran-local-storage-node1-001
 spec:
   capacity:
-    storage: 100Gi
+    storage: 10Gi
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
