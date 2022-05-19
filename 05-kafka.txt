@@ -2,7 +2,7 @@ helm install -f values/kafka-values.yaml mayuran-2205-release --create-namespace
 
 
 NAME: mayuran-2205-release
-LAST DEPLOYED: Thu May 19 20:33:04 2022
+LAST DEPLOYED: Thu May 19 20:42:28 2022
 NAMESPACE: mayuran-kafka-space
 STATUS: deployed
 REVISION: 1
@@ -31,14 +31,15 @@ To create a pod that you can use as a Kafka client run the following commands:
         kafka-console-producer.sh \
 
             --broker-list mayuran-2205-release-kafka-0.mayuran-2205-release-kafka-headless.mayuran-kafka-space.svc.cluster.local:9092 \
-            --topic test
+            --topic mayuran-topic-001
 
     CONSUMER:
         kafka-console-consumer.sh \
 
             --bootstrap-server mayuran-2205-release-kafka.mayuran-kafka-space.svc.cluster.local:9092 \
-            --topic test \
+            --topic mayuran-topic-001 \
             --from-beginning
+
 
 			
 			
