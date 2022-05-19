@@ -1,8 +1,10 @@
+helm delete mayuran-2205-release -n mayuran-kafka-space
+
 helm install -f values/kafka-values.yaml mayuran-2205-release --create-namespace -n mayuran-kafka-space bitnami/kafka
 
 
 NAME: mayuran-2205-release
-LAST DEPLOYED: Thu May 19 20:42:28 2022
+LAST DEPLOYED: Thu May 19 21:51:42 2022
 NAMESPACE: mayuran-kafka-space
 STATUS: deployed
 REVISION: 1
@@ -11,6 +13,17 @@ NOTES:
 CHART NAME: kafka
 CHART VERSION: 16.2.13
 APP VERSION: 3.1.1
+---------------------------------------------------------------------------------------------
+ WARNING
+
+    By specifying "serviceType=LoadBalancer" and not configuring the authentication
+    you have most likely exposed the Kafka service externally without any
+    authentication mechanism.
+
+    For security reasons, we strongly suggest that you switch to "ClusterIP" or
+    "NodePort". As alternative, you can also configure the Kafka authentication.
+
+---------------------------------------------------------------------------------------------
 
 ** Please be patient while the chart is being deployed **
 
@@ -31,16 +44,29 @@ To create a pod that you can use as a Kafka client run the following commands:
         kafka-console-producer.sh \
 
             --broker-list mayuran-2205-release-kafka-0.mayuran-2205-release-kafka-headless.mayuran-kafka-space.svc.cluster.local:9092 \
-            --topic mayuran-topic-001
+            --topic test
 
     CONSUMER:
         kafka-console-consumer.sh \
 
             --bootstrap-server mayuran-2205-release-kafka.mayuran-kafka-space.svc.cluster.local:9092 \
-            --topic mayuran-topic-001 \
+            --topic test \
             --from-beginning
 
+To connect to your Kafka server from outside the cluster, follow the instructions below:
 
+    Kafka brokers domain: You can get the external node IP from the Kafka configuration file with the following commands (Check the EXTERNAL listener)
+
+        1. Obtain the pod name:
+
+        kubectl get pods --namespace mayuran-kafka-space -l "app.kubernetes.io/name=kafka,app.kubernetes.io/instance=mayuran-2205-release,app.kubernetes.io/component=kafka"
+
+        2. Obtain pod configuration:
+
+        kubectl exec -it KAFKA_POD -- cat /opt/bitnami/kafka/config/server.properties | grep advertised.listeners
+
+    Kafka brokers port: You will have a different node port for each Kafka broker. You can get the list of configured node ports using the command below:
+
+        echo "$(kubectl get svc --namespace mayuran-kafka-space -l "app.kubernetes.io/name=kafka,app.kubernetes.io/instance=mayuran-2205-release,app.kubernetes.io/component=kafka,pod" -o jsonpath='{.items[*].spec.ports[0].nodePort}' | tr ' ' '\n')"
 			
-			
-helm delete mayuran-2205-release -n mayuran-kafka-space
+
