@@ -1,0 +1,1 @@
+helm install -f values/kafka-values.yaml mayuran-2205-release --create-namespace -n mayuran-kafka-space bitnami/kafka
