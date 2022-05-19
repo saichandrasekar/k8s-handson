@@ -1,0 +1,1 @@
+kubectl apply -f storage-class/mayuran-local-storage-class.yaml -n mayuran-dev-space

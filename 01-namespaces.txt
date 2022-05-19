@@ -1,8 +1,8 @@
 # Create new namespace
-kubectl create namespace mayuran-space
+kubectl create namespace mayuran-dev-space
 
 # Delete namespace
-kubectl delete namespace mayuran-space
+kubectl delete namespace mayuran-dev-space
 
 # List namespaces
 kubectl get namespaces

@@ -1,0 +1,1 @@
+kubectl apply -f pvs/master-local-pv.yaml -n mayuran-dev-space
