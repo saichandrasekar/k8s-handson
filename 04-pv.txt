@@ -1,1 +1,4 @@
-kubectl apply -f pvs/master-local-pv.yaml -n mayuran-dev-space
+kubectl apply -f pvs/master-local-pv-node1.yaml -n mayuran-dev-space
+
+kubectl apply -f pvs/master-local-pv-node2.yaml -n mayuran-dev-space
+
